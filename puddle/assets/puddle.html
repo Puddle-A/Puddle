@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HTMLフォントと背景設定</title>
+    <style>
+        body {
+            background-image: url('assets/background/puddle.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: 'Kosugi Maru', sans-serif;
+            color: white;
+        }
+    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap">
+</head>
+<body>
+    <h1>ファイルを読み込む</h1>
+    <input type="file" id="fileInput">
+    <button onclick="uploadFile()">アップロード</button>
+
+    <script>
+        function uploadFile() {
+            // ファイルの処理を行うコードをここに追加
+            alert("ファイルがアップロードされました。");
+        }
+    </script>
+</body>
+</html>

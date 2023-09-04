@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUDDLE - CREATE</title>
+    <link rel="icon" href="assets/icon/icon.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-image: url('assets/background/puddle.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: 'Kosugi Maru', sans-serif;
+            color: white;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+        }
+
+        .custom-upload-button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .custom-upload-button:hover {
+            background-color: #06477d;
+            box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .custom-upload-button input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .custom-upload-button .custom-icon {
+            background-image: url('assets/icon/new_icon.png');
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+    .question-container {
+        margin-top: 20px;
+    }
+
+    .custom-upload-button {
+        /* 保存ボタンと同じスタイルを使いましょう */
+        background-color: #007BFF;
+        color: white;
+        padding: 10px 20px;
+        cursor: pointer;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        margin-top: 20px; /* ボタン間のマージンを追加 */
+        display: flex;
+        align-items: center;
+        box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .custom-upload-button:hover {
+        background-color: #06477d;
+        box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .custom-upload-button input[type="file"] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .custom-upload-button .custom-icon {
+        background-image: url('assets/icon/new_icon.png');
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+    }
+</style>
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button class="custom-upload-button" onclick="addQuestion()">問題を追加</button>
+        <div id="questions"></div>
+        <button class="custom-upload-button" onclick="saveToFile()">保存</button>
+    </div>
+
+    <script>
+function saveToFile() {
+    const questions = [];
+    for (let i = 1; i <= questionCount; i++) {
+        const questionNameInput = document.querySelector(`#questions input:nth-child(${i * 2 - 1})`);
+        const answerInput = document.querySelector(`#questions input:nth-child(${i * 2})`);
+
+        if (questionNameInput && answerInput) {
+            const questionName = questionNameInput.value;
+            const answer = answerInput.value;
+            questions.push(`q:${questionName} a:${answer}`);
+        }
+    }
+
+    const content = questions.join(", ");
+
+    // テキストファイルに保存するためのコードを追加
+    const blob = new Blob([content], { type: "text/plain" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "questions.txt";
+    a.style.display = "none";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+    </script>
+</body>
+</html>
